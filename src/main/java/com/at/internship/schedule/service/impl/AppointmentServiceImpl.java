@@ -1,7 +1,8 @@
 package com.at.internship.schedule.service.impl;
 
-import com.at.internship.schedule.config.CsvRepositoryConfig;
+import com.at.internship.schedule.config.DefaultRepositoryConfig;
 import com.at.internship.schedule.config.MockRepositoryConfig;
+import com.at.internship.schedule.config.CsvRepositoryConfig;
 import com.at.internship.schedule.domain.Appointment;
 import com.at.internship.schedule.repository.IAppointmentRepository;
 import com.at.internship.schedule.service.IAppointmentService;
@@ -16,7 +17,7 @@ public class AppointmentServiceImpl implements IAppointmentService {
     private final IAppointmentRepository appointmentRepository;
 
     public AppointmentServiceImpl(
-            @Qualifier(MockRepositoryConfig.BEAN_APPOINTMENT_REPOSITORY)
+            @Qualifier(DefaultRepositoryConfig.REPOSITORY_APPOINTMENT_DEFAULT)
             IAppointmentRepository appointmentRepository
     ) {
         this.appointmentRepository = appointmentRepository;
