@@ -25,4 +25,15 @@ public class ContactConverter {
         return contactDto;
     }
 
+    public Contact toContact(ContactDto contactDto) {
+        Contact contact = new Contact();
+        contact.setId(contactDto.getId());
+        contact.setFirstName(contactDto.getFirstName());
+        contact.setLastName(contactDto.getLastName());
+        contact.setEmailAddress(contactDto.getEmailAddress());
+        contact.setPhoneNumber(contactDto.getPhoneNumber());
+        contact.setBirthDay(dateUtils.parseDefaultDate(contactDto.getBirthDay()));
+        return contact;
+    }
+
 }

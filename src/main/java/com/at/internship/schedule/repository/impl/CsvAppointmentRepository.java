@@ -9,7 +9,8 @@ import com.at.internship.schedule.serialization.csv.AppointmentSerializer;
 import java.time.LocalDate;
 import java.util.List;
 
-public class CsvAppointmentRepository extends AbstractRepository<Appointment, Integer> implements IAppointmentRepository {
+@Deprecated
+public class CsvAppointmentRepository extends AbstractRepository<Appointment, Integer> {
     private static int ID_SEQUENCE = 0;
     private static CsvAppointmentRepository SINGLETON;
 

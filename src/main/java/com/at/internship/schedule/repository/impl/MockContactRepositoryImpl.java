@@ -9,7 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class MockContactRepositoryImpl implements IContactRepository {
+@Component
+@Deprecated
+public class MockContactRepositoryImpl {
     private static final List<Contact> CONTACT_LIST;
 
     static {
@@ -63,7 +65,6 @@ public class MockContactRepositoryImpl implements IContactRepository {
         CONTACT_LIST.add(contact);
     }
 
-    @Override
     public List<Contact> findAll() {
         return CONTACT_LIST.stream().map(Contact::new).collect(Collectors.toList());
     }

@@ -27,6 +27,15 @@ public class AppointmentConverter {
         return appointmentDto;
     }
 
+    public Appointment toAppointment(AppointmentDto appointmentDto){
+        Appointment appointment = new Appointment();
+        appointment.setId(appointmentDto.getId());
+        appointment.setContactId(appointmentDto.getContactId());
+        appointment.setSubject(appointmentDto.getSubject());
+        appointment.setTime(dateUtils.parseDefaultDateTime(appointmentDto.getTime()));
+        return appointment;
+    }
+
     private String toStringContactName(Contact contact) {
         if(contact == null) return null;
         return String.format("%s %s",

@@ -1,12 +1,8 @@
 package com.at.internship.schedule.service.impl;
 
-import com.at.internship.schedule.config.DefaultRepositoryConfig;
-import com.at.internship.schedule.config.MockRepositoryConfig;
-import com.at.internship.schedule.config.CsvRepositoryConfig;
 import com.at.internship.schedule.domain.Appointment;
 import com.at.internship.schedule.repository.IAppointmentRepository;
 import com.at.internship.schedule.service.IAppointmentService;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,7 +13,6 @@ public class AppointmentServiceImpl implements IAppointmentService {
     private final IAppointmentRepository appointmentRepository;
 
     public AppointmentServiceImpl(
-            @Qualifier(DefaultRepositoryConfig.REPOSITORY_APPOINTMENT_DEFAULT)
             IAppointmentRepository appointmentRepository
     ) {
         this.appointmentRepository = appointmentRepository;
@@ -26,6 +21,11 @@ public class AppointmentServiceImpl implements IAppointmentService {
     @Override
     public List<Appointment> findAll() {
         return appointmentRepository.findAll();
+    }
+
+    @Override
+    public Appointment create(Appointment appointment) {
+        return appointmentRepository.save(appointment);
     }
 
 }

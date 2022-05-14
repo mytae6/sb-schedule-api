@@ -9,7 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class MockAppointmentRepositoryImpl implements IAppointmentRepository {
+@Component
+@Deprecated
+public class MockAppointmentRepositoryImpl {
 
     private static final List<Appointment> APPOINTMENT_LIST;
 

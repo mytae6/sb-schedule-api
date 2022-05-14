@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface IAppointmentService {
     List<Appointment> findAll();
+    Appointment create(Appointment appointment);
 }
