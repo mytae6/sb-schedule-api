@@ -1,10 +1,18 @@
 package com.at.internship.schedule.service;
 
 import com.at.internship.schedule.domain.Appointment;
+import com.at.internship.schedule.dto.AppointmentFilterDto;
+import com.at.internship.schedule.dto.AppointmentFilterDto;
+import org.springframework.data.domain.Page;
 
-import java.util.List;
+import org.springframework.data.domain.Pageable;
+
+import java.util.Optional;
 
 public interface IAppointmentService {
-    List<Appointment> findAll();
+    Page<Appointment> findAll(AppointmentFilterDto filters, Pageable pageable);
     Appointment create(Appointment appointment);
+    Appointment update(Appointment appointment);
+    Optional<Appointment> findById(Integer id);
+    void delete(Integer id);
 }

@@ -1,7 +1,9 @@
 package com.at.internship.schedule.converter;
 
 import com.at.internship.schedule.domain.Contact;
-import com.at.internship.schedule.dto.ContactDto;
+import com.at.internship.schedule.dto.ContactDetailDto;
+import com.at.internship.schedule.dto.ContactCreateDto;
+import com.at.internship.schedule.dto.ContactUpdateDto;
 import com.at.internship.schedule.utils.DateUtils;
 import org.springframework.stereotype.Component;
 
@@ -14,26 +16,35 @@ public class ContactConverter {
         this.dateUtils = dateUtils;
     }
 
-    public ContactDto toContactDto(Contact contact) {
-        ContactDto contactDto = new ContactDto();
-        contactDto.setId(contact.getId());
-        contactDto.setFirstName(contact.getFirstName());
-        contactDto.setLastName(contact.getLastName());
-        contactDto.setEmailAddress(contact.getEmailAddress());
-        contactDto.setPhoneNumber(contact.getPhoneNumber());
-        contactDto.setBirthDay(dateUtils.formatDefault(contact.getBirthDay()));
-        return contactDto;
+    public ContactDetailDto toContactDetailDto(Contact contact) {
+        ContactDetailDto contactDetailDto = new ContactDetailDto();
+        contactDetailDto.setId(contact.getId());
+        contactDetailDto.setFirstName(contact.getFirstName());
+        contactDetailDto.setLastName(contact.getLastName());
+        contactDetailDto.setEmailAddress(contact.getEmailAddress());
+        contactDetailDto.setBirthDay(dateUtils.formatDefault(contact.getBirthDay()));
+        return contactDetailDto;
     }
 
-    public Contact toContact(ContactDto contactDto) {
+    public Contact updateContactDtoToContact(ContactUpdateDto contactUpdateDto) {
         Contact contact = new Contact();
-        contact.setId(contactDto.getId());
-        contact.setFirstName(contactDto.getFirstName());
-        contact.setLastName(contactDto.getLastName());
-        contact.setEmailAddress(contactDto.getEmailAddress());
-        contact.setPhoneNumber(contactDto.getPhoneNumber());
-        contact.setBirthDay(dateUtils.parseDefaultDate(contactDto.getBirthDay()));
+        contact.setId(contactUpdateDto.getId());
+        contact.setFirstName(contactUpdateDto.getFirstName());
+        contact.setLastName(contactUpdateDto.getLastName());
+        contact.setEmailAddress(contactUpdateDto.getEmailAddress());
+        contact.setBirthDay(dateUtils.parseDefaultDate(contactUpdateDto.getBirthDay()));
         return contact;
     }
+
+
+    public Contact contactCreateDtoToContact(ContactCreateDto contactCreateDtoDto) {
+        Contact contact = new Contact();
+        contact.setFirstName(contactCreateDtoDto.getFirstName());
+        contact.setLastName(contactCreateDtoDto.getLastName());
+        contact.setEmailAddress(contactCreateDtoDto.getEmailAddress());
+        contact.setBirthDay(dateUtils.parseDefaultDate(contactCreateDtoDto.getBirthDay()));
+        return contact;
+    }
+
 
 }

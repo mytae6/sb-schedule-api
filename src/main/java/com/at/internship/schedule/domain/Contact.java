@@ -2,45 +2,40 @@ package com.at.internship.schedule.domain;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Formula;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
 @Data
 @NoArgsConstructor
 @Entity
-public class Contact {
+public class Contact implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(nullable = false)
+    @Column(nullable = false, name = "first_name", length = 50)
     private String firstName;
-    @Column(nullable = false)
+    @Column(nullable = false, name = "last_name", length = 50)
     private String lastName;
+    @Column(nullable = false, name = "email", length = 100)
     private String emailAddress;
-    @Deprecated
-    private String phoneNumber;
+    @Column(name = "birth_day")
     private LocalDate birthDay;
-    @Column(insertable = false, updatable = false)
-    private LocalDateTime createDate;
-    @Column(insertable = false)
-    private LocalDateTime lastUpdateDate;
-    @Transient
-    private List<ContactPhone> phoneNumbers;
 
-    public Contact(Contact source) {
-        if(source == null)
-            return;
-        this.id = source.id;
-        this.firstName = source.firstName;
-        this.lastName = source.lastName;
-        this.emailAddress = source.emailAddress;
-        this.phoneNumber = source.phoneNumber;
-        this.birthDay = source.birthDay;
-    }
+    @Formula("CONCAT(first_name,' ', last_name)")
+    private String name;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "phone_id", referencedColumnName = "id", insertable = false, updatable = false)
+    private List<ContactPhone> contactPhones;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "appointment_id", referencedColumnName = "id", insertable = false, updatable = false)
+    private List<Appointment> appointments;
 
     @Override
     public boolean equals(Object o) {

@@ -21,17 +21,16 @@ public class AppointmentConverter {
         AppointmentDto appointmentDto = new AppointmentDto();
         appointmentDto.setId(appointment.getId());
         appointmentDto.setContactId(appointment.getContactId());
-        appointmentDto.setContactName(toStringContactName(appointment.getContact()));
         appointmentDto.setTime(dateUtils.formatDefault(appointment.getTime()));
         appointmentDto.setSubject(appointment.getSubject());
         return appointmentDto;
     }
 
-    public Appointment toAppointment(AppointmentDto appointmentDto){
+    public Appointment toAppointment(AppointmentDto appointmentDto) {
         Appointment appointment = new Appointment();
         appointment.setId(appointmentDto.getId());
-        appointment.setContactId(appointmentDto.getContactId());
         appointment.setSubject(appointmentDto.getSubject());
+        appointment.setContactId(appointmentDto.getContactId());
         appointment.setTime(dateUtils.parseDefaultDateTime(appointmentDto.getTime()));
         return appointment;
     }
